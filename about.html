@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>关于我们 · 德职通</title>
+  <meta name="description" content="德职通创始团队来自北大、清华、德国亚琛工大，深耕中德职业教育十年，专注职业路径设计。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;900&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    .page-hero {
+      position: relative;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      padding: calc(var(--nav-h) + 72px) 0 80px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0;
+      background: url('assets/neuschwanstein.jpg') center 25% / cover no-repeat;
+      opacity: .18;
+    }
+    .page-hero .section-eyebrow { color: var(--gold); position: relative; z-index:1; }
+    .page-hero .section-title { color: var(--white); margin-bottom: 16px; position: relative; z-index:1; }
+    .page-hero .section-desc { color: rgba(255,255,255,.7); position: relative; z-index:1; }
+
+    /* About intro */
+    .about-intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .about-intro-text .lead {
+      font-size: 1.1rem;
+      color: var(--navy);
+      font-weight: 500;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .about-intro-text p {
+      font-size: .96rem;
+      color: var(--gray600);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .connections { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
+    .conn-item { display: flex; align-items: flex-start; gap: 14px; }
+    .conn-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--gray100); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .conn-text { font-size: .94rem; color: var(--gray600); line-height: 1.6; padding-top: 10px; }
+
+    .about-vision-stack { display: flex; flex-direction: column; gap: 20px; }
+    .vision-card {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      border-radius: var(--radius);
+      padding: 32px;
+      color: var(--white);
+    }
+    .vision-card h3 { font-size: 1rem; color: var(--gold); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 12px; }
+    .vision-card p { font-size: 1rem; line-height: 1.8; opacity: .88; }
+    .vision-card em { color: var(--gold2); font-style: normal; font-weight: 600; }
+
+    /* Intro image */
+    .about-intro-img {
+      width: 100%; height: 300px; object-fit: cover; border-radius: var(--radius);
+      margin-top: 32px;
+    }
+
+    /* Founders */
+    .founders-section { background: var(--gray50); }
+    .founders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .founder-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px;
+      border: 1px solid var(--gray200);
+      display: flex;
+      gap: 20px;
+      transition: var(--transition);
+    }
+    .founder-card:hover { border-color: var(--gold); box-shadow: var(--shadow); }
+    .founder-avatar {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy), var(--navy2));
+      color: var(--gold);
+      font-size: 1.6rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-family: var(--serif);
+    }
+    .founder-info { flex: 1; }
+    .founder-info strong { display: block; font-size: 1rem; color: var(--navy); margin-bottom: 6px; }
+    .founder-info span { display: block; font-size: .88rem; color: var(--gray600); margin-bottom: 12px; line-height: 1.6; }
+    .founder-info blockquote { font-size: .88rem; color: var(--gold); border-left: 3px solid var(--gold); padding-left: 12px; line-height: 1.6; font-style: italic; }
+
+    /* Advantages */
+    .adv-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .adv-card {
+      text-align: center; padding: 32px 20px;
+      background: var(--white); border-radius: var(--radius); border: 1px solid var(--gray200);
+      transition: var(--transition);
+    }
+    .adv-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--gold); }
+    .adv-icon { font-size: 2rem; margin-bottom: 16px; }
+    .adv-card h4 { font-size: 1rem; color: var(--navy); font-weight: 700; margin-bottom: 10px; }
+    .adv-card p { font-size: .88rem; color: var(--gray600); line-height: 1.7; }
+
+    /* Opportunity */
+    .opportunity { background: linear-gradient(160deg, var(--navy) 0%, #112244 100%); }
+    .wave-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .wave-card {
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius); padding: 32px 24px; transition: var(--transition);
+    }
+    .wave-card:hover { background: rgba(201,168,76,.1); border-color: rgba(201,168,76,.4); }
+    .wave-num { font-size: 3rem; font-weight: 900; color: rgba(201,168,76,.3); font-family: var(--serif); line-height: 1; margin-bottom: 14px; }
+    .wave-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+    .wave-card p { font-size: .9rem; color: rgba(255,255,255,.65); line-height: 1.7; }
+
+    /* Methodology */
+    .method-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+    .method-step { text-align: center; padding: 32px 24px; position: relative; }
+    .method-step:not(:last-child)::after {
+      content: '→';
+      position: absolute; right: -12px; top: 50%; transform: translateY(-50%);
+      color: var(--gold); font-size: 1.4rem; z-index: 1;
+    }
+    .step-circle {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 80px; height: 80px; border-radius: 50%;
+      background: rgba(201,168,76,.15); border: 2px solid var(--gold);
+      color: var(--gold2); font-weight: 700; font-size: .9rem;
+      margin: 0 auto 20px; font-family: var(--serif);
+    }
+    .method-step h4 { color: var(--white); font-size: 1rem; margin-bottom: 10px; }
+    .method-step p { font-size: .88rem; color: rgba(255,255,255,.65); line-height: 1.7; }
+
+    @media (max-width: 768px) {
+      .about-intro-grid { grid-template-columns: 1fr; gap: 40px; }
+      .founders-grid { grid-template-columns: 1fr; }
+      .adv-grid { grid-template-columns: 1fr 1fr; }
+      .wave-grid { grid-template-columns: 1fr; }
+      .method-steps { grid-template-columns: 1fr; }
+      .method-step:not(:last-child)::after { content: '↓'; right: 50%; top: auto; bottom: -14px; transform: none; }
+    }
+    @media (max-width: 480px) {
+      .adv-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo.png" alt="德职通 Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="nav-logo-text" style="display:none">
+          <span class="nav-logo-name">德职通</span>
+          <span class="nav-logo-sub">中德双元制教育</span>
+        </div>
+        <div class="nav-logo-text">
+          <span class="nav-logo-sub">中德双元制教育平台</span>
+        </div>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="菜单"><span></span><span></span><span></span></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="about.html">关于我们</a></li>
+        <li><a href="products.html">核心产品</a></li>
+        <li><a href="partners.html">合作生态</a></li>
+        <li><a href="faq.html">常见问题</a></li>
+        <li><a href="contact.html" class="nav-cta">预约咨询</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="container">
+      <p class="section-eyebrow">关于德职通</p>
+      <h1 class="section-title">中德职教桥梁<br />职业路径设计专家</h1>
+      <p class="section-desc">我们不是留学中介，我们是职业路径设计平台</p>
+    </div>
+  </div>
+
+  <section class="section" style="position:relative;overflow:hidden">
+    <div class="section-bg-layer" style="position:absolute;inset:0;background:url('assets/cathedral-blossom.jpg') center 35%/cover no-repeat;opacity:.06;"></div>
+    <div class="container">
+      <div class="about-intro-grid">
+        <div class="about-intro-text reveal">
+          <p class="lead">德职通诞生于中德教育与产业体系的交汇点。</p>
+          <p>面对中国教育内卷的焦虑，我们选择了另一个方向——向德国学习，引入已运行近百年的双元制职业教育体系。</p>
+          <p>我们相信，每个人都有权利选择一条真正适合自己的路。而德国双元制，就是那条被证明过的路。</p>
+          <div class="connections">
+            <div class="conn-item">
+              <div class="conn-icon">🌉</div>
+              <div class="conn-text">连接中国家庭与德国成熟的职业教育体系</div>
+            </div>
+            <div class="conn-item">
+              <div class="conn-icon">🏭</div>
+              <div class="conn-text">连接前沿产业需求与职业教育人才培养</div>
+            </div>
+            <div class="conn-item">
+              <div class="conn-icon">🎯</div>
+              <div class="conn-text">连接青年的职业理想与落地的现实路径</div>
+            </div>
+            <div class="conn-item">
+              <div class="conn-icon">🌱</div>
+              <div class="conn-text">连接个人价值成长与社会发展的核心需求</div>
+            </div>
+          </div>
+        </div>
+        <div class="about-vision-stack reveal">
+          <div class="vision-card">
+            <h3>品牌愿景</h3>
+            <p>让每一个人，都能找到真正能带来成就感的事业，实现自我价值，拥有真正的 <em>Happy Life</em>。</p>
+          </div>
+          <div class="vision-card" style="background: linear-gradient(135deg,#8B1A1A,#5a0e0e)">
+            <h3>品牌价值观</h3>
+            <p>教育不是投资回报率问题，而是人生质量问题。<br />路径不是选出来的，是<em>设计</em>出来的。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section founders-section" id="team" style="position:relative;overflow:hidden">
+    <div class="section-bg-layer" style="position:absolute;inset:0;background:url('assets/hamburg-port.jpg') center 50%/cover no-repeat;opacity:.07;"></div>
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">创始团队</p>
+        <h2 class="section-title">站在你背后的人</h2>
+      </div>
+      <div class="founders-grid">
+        <div class="founder-card reveal">
+          <div class="founder-avatar">M</div>
+          <div class="founder-info">
+            <strong>M老师 · 创始人</strong>
+            <span>北京大学毕业，聚焦青少年成长路径规划与国际教育体系研究，十年教育行业深耕</span>
+            <blockquote>"教育不是投资回报率问题，而是人生质量问题。"</blockquote>
+          </div>
+        </div>
+        <div class="founder-card reveal">
+          <div class="founder-avatar">F</div>
+          <div class="founder-info">
+            <strong>F老师 · 联合创始人</strong>
+            <span>清华大学 + 德国亚琛工业大学（RWTH Aachen）双背景，深度参与中德产业合作项目</span>
+            <blockquote>"路径不是选出来的，是设计出来的。"</blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="position:relative;overflow:hidden">
+    <div class="section-bg-layer" style="position:absolute;inset:0;background:url('assets/classroom.jpg') center 50%/cover no-repeat;opacity:.06;"></div>
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">核心优势</p>
+        <h2 class="section-title">为什么信任我们</h2>
+      </div>
+      <div class="adv-grid">
+        <div class="adv-card reveal">
+          <div class="adv-icon">🎓</div>
+          <h4>顶尖学府基因</h4>
+          <p>创始团队具备北大、清华、德国亚琛工大顶尖教育背景，拥有十年教育行业深耕经验。</p>
+        </div>
+        <div class="adv-card reveal">
+          <div class="adv-icon">🤝</div>
+          <h4>德国官方深度合作</h4>
+          <p>与德国萨克森州建筑协会（BBSN）、德国工商大会（IHK）等权威机构建立战略合作伙伴关系。</p>
+        </div>
+        <div class="adv-card reveal">
+          <div class="adv-icon">🔄</div>
+          <h4>全流程闭环服务</h4>
+          <p>从德语培训、企业匹配到赴德后全程陪伴，德国本地7×24小时双语辅导员随时响应。</p>
+        </div>
+        <div class="adv-card reveal">
+          <div class="adv-icon">📜</div>
+          <h4>权威认证体系</h4>
+          <p>毕业可获德国工商大会（IHK）签发的职业资格证书，欧盟通用、全球认可。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section opportunity" style="position:relative;overflow:hidden">
+    <div class="section-bg-layer" style="position:absolute;inset:0;background:url('assets/flight-to-germany.jpg') center 40%/cover no-repeat;opacity:.08;"></div>
+    <div class="container">
+      <div class="section-header light">
+        <p class="section-eyebrow">时代机遇</p>
+        <h2 class="section-title">三大浪潮交汇点<br />为什么是现在？</h2>
+      </div>
+      <div class="wave-grid">
+        <div class="wave-card reveal">
+          <div class="wave-num">01</div>
+          <h3>教育焦虑持续升级</h3>
+          <p>学历内卷不断加剧，名校资源稀缺，就业市场不确定性增强，单一的升学路径已无法承载青年对人生发展的多元需求。</p>
+        </div>
+        <div class="wave-card reveal">
+          <div class="wave-num">02</div>
+          <h3>产业结构深刻变革</h3>
+          <p>中国制造业升级进入关键期，高端技术型人才缺口持续扩大，具备国际视野与实操能力的技能人才迎来黄金发展期。</p>
+        </div>
+        <div class="wave-card reveal">
+          <div class="wave-num">03</div>
+          <h3>职业教育价值重估</h3>
+          <p>技能型人才收入与社会地位持续提升，德国「双元制」职业教育体系已成为中国职业教育升级的核心参照。</p>
+        </div>
+      </div>
+      <div style="margin-top:64px">
+        <h3 class="sub-title light" style="text-align:center">核心方法论 · 三层结构成长模型</h3>
+        <div class="method-steps">
+          <div class="method-step reveal">
+            <div class="step-circle">认知层</div>
+            <h4>扩大视野</h4>
+            <p>打破「人生只有独木桥」的固化认知，让青年看见职业成长的多元可能性。</p>
+          </div>
+          <div class="method-step reveal">
+            <div class="step-circle">结构层</div>
+            <h4>设计路径</h4>
+            <p>基于个人背景与职业目标，结合德国双元制体系，量身定制专属职业成长方案。</p>
+          </div>
+          <div class="method-step reveal">
+            <div class="step-circle">行动层</div>
+            <h4>陪伴执行</h4>
+            <p>以全流程闭环服务体系，陪伴学生完成每一步，将规划落地为结果。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="assets/logo.png" alt="德职通" height="40" onerror="this.style.display='none'" />
+            <span class="footer-logo-name">德职通</span>
+          </div>
+          <p>中德双元制留学与研学专家<br />职业路径设计平台</p>
+        </div>
+        <div class="footer-links">
+          <div class="fl-col"><h5>核心服务</h5><ul><li><a href="products.html#study">短期游学研学</a></li><li><a href="products.html#longterm">长期双元制留学</a></li><li><a href="partners.html">机构合作赋能</a></li></ul></div>
+          <div class="fl-col"><h5>关于我们</h5><ul><li><a href="about.html">品牌理念</a></li><li><a href="about.html#team">创始团队</a></li><li><a href="faq.html">常见问题</a></li></ul></div>
+          <div class="fl-col"><h5>联系方式</h5><ul><li>微信：dezhitong123</li><li>网址：www.dezhitong.cn</li><li>地址：北京市海淀区</li></ul></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2024 德职通双元制教育 版权所有</span>
+        <div class="beian-items">
+          <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048539" target="_blank" rel="noopener" class="beian-link">
+            <svg class="beian-icon" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.5C17.25 22.15 21 17.25 21 12V7L12 2z" fill="#c9a84c" opacity="0.25"/><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.5C17.25 22.15 21 17.25 21 12V7L12 2z" stroke="#c9a84c" stroke-width="1.5" fill="none"/><path d="M9 12l2 2 4-4" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            京公网安备 11010802048539号
+          </a>
+          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener" class="beian-link">京ICP备XXXXXXXX号</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>德职通 · 中德双元制教育平台</title>
+  <meta name="description" content="德职通——中德双元制留学与研学专家。帮助中国青年通过德国双元制职业教育体系，获得IHK认证，开启国际职业生涯。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;900&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    /* ======= INDEX PAGE STYLES ======= */
+
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/hero-bg.jpg');
+      background-size: cover;
+      background-position: center 40%;
+      transform: scale(1.04);
+      transition: transform 8s ease;
+    }
+    .hero-bg.loaded { transform: scale(1); }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(13,31,60,.82) 0%,
+        rgba(13,31,60,.65) 50%,
+        rgba(26,58,107,.5) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: calc(var(--nav-h) + 60px) 24px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .hero-left {}
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(201,168,76,.18);
+      border: 1px solid rgba(201,168,76,.4);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--gold2);
+      letter-spacing: .1em;
+      margin-bottom: 24px;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--gold2);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100%{ opacity:1; transform:scale(1); }
+      50%{ opacity:.5; transform:scale(1.6); }
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.18;
+      margin-bottom: 12px;
+    }
+    .hero-title .accent { color: var(--gold2); }
+    .hero-subtitle-main {
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      color: rgba(255,255,255,.88);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .hero-desc {
+      font-size: .95rem;
+      color: rgba(255,255,255,.68);
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* Hero right — core services card */
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .hero-card {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 14px;
+      padding: 20px 24px;
+      transition: var(--transition);
+    }
+    .hero-card:hover {
+      background: rgba(201,168,76,.12);
+      border-color: rgba(201,168,76,.4);
+      transform: translateX(4px);
+    }
+    .hero-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .hero-card-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--gold), #a06a00);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .hero-card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .hero-card-tag {
+      margin-left: auto;
+      font-size: .76rem;
+      background: rgba(201,168,76,.25);
+      color: var(--gold2);
+      padding: 2px 10px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+    .hero-card p {
+      font-size: .95rem;
+      color: rgba(255,255,255,.68);
+      line-height: 1.6;
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255,255,255,.45);
+      font-size: .72rem;
+      letter-spacing: .1em;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,.4), transparent);
+      animation: scrollline 2s ease-in-out infinite;
+    }
+    @keyframes scrollline {
+      0%,100%{ opacity:1; transform:scaleY(1); }
+      50%{ opacity:.3; transform:scaleY(.5); }
+    }
+
+    /* Stats bar */
+    .stats-bar {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      padding: 48px 0;
+      border-bottom: 3px solid var(--gold);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .stat-item {
+      text-align: center;
+      position: relative;
+    }
+    .stat-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 10%; bottom: 10%;
+      width: 1px;
+      background: rgba(255,255,255,.15);
+    }
+    .stat-num {
+      display: block;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--gold);
+      font-family: var(--serif);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: .85rem;
+      color: rgba(255,255,255,.7);
+    }
+
+    /* What we do */
+    .services { background: var(--gray50); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .svc-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      border: 1px solid var(--gray200);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .svc-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 8px 32px rgba(201,168,76,.15);
+      transform: translateY(-4px);
+    }
+    .svc-icon {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(201,168,76,.15), rgba(201,168,76,.05));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+    }
+    .svc-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 10px;
+      font-family: var(--serif);
+    }
+    .svc-card p {
+      font-size: .9rem;
+      color: var(--gray600);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .svc-link {
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: var(--transition);
+    }
+    .svc-link:hover { gap: 8px; }
+
+    /* Why choose us — 3 columns */
+    .why { background: var(--white); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .why-card {
+      text-align: center;
+      padding: 32px 20px;
+      border-radius: var(--radius);
+      background: var(--gray50);
+      border: 1px solid var(--gray200);
+      transition: var(--transition);
+    }
+    .why-card:hover {
+      background: var(--navy);
+      border-color: var(--navy);
+    }
+    .why-card:hover .why-title,
+    .why-card:hover .why-desc { color: var(--white); }
+    .why-card:hover .why-num { color: var(--gold2); }
+    .why-num {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--gold);
+      font-family: var(--serif);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .why-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .why-desc {
+      font-size: .85rem;
+      color: var(--gray600);
+      line-height: 1.6;
+    }
+
+    /* Partners strip */
+    .partners-strip {
+      background: var(--navy);
+      padding: 48px 0;
+    }
+    .partners-strip-header {
+      text-align: center;
+      color: rgba(255,255,255,.5);
+      font-size: .78rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .partners-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .partner-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,.6);
+      font-size: .9rem;
+      font-weight: 600;
+      padding: 10px 20px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 8px;
+      transition: var(--transition);
+    }
+    .partner-badge:hover {
+      border-color: rgba(201,168,76,.5);
+      color: var(--gold2);
+    }
+    .partner-badge .flag { font-size: 1.2rem; }
+
+    /* CTA section */
+    .cta-section {
+      background: linear-gradient(135deg, var(--navy2) 0%, var(--navy) 100%);
+      padding: 96px 0;
+      text-align: center;
+    }
+    .cta-section .section-title { color: var(--white); }
+    .cta-section .section-desc { color: rgba(255,255,255,.7); margin-bottom: 40px; }
+    .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* ——— Responsive ——— */
+    @media (max-width: 960px) {
+      .hero-content { grid-template-columns: 1fr; gap: 40px; }
+      .hero-right { display: none; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .stat-item:nth-child(2)::after { display: none; }
+    }
+    @media (max-width: 600px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 400px) {
+      .why-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo.png" alt="德职通 Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="nav-logo-text" style="display:none">
+          <span class="nav-logo-name">德职通</span>
+          <span class="nav-logo-sub">中德双元制教育</span>
+        </div>
+        <div class="nav-logo-text">
+          <span class="nav-logo-sub">中德双元制教育平台</span>
+        </div>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="菜单">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="about.html">关于我们</a></li>
+        <li><a href="products.html">核心产品</a></li>
+        <li><a href="partners.html">合作生态</a></li>
+        <li><a href="faq.html">常见问题</a></li>
+        <li><a href="contact.html" class="nav-cta">预约咨询</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg" id="heroBg">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-tag">🇩🇪 中德双元制职业教育专家</div>
+        <h1 class="hero-title">
+          用德国<span class="accent">双元制</span>模式<br />
+          设计你的职业路径
+        </h1>
+        <p class="hero-subtitle-main">帮助中国青年直通德国企业，获得 IHK 国际职业认证</p>
+        <p class="hero-desc">
+          德职通不是留学中介，而是职业路径设计平台。<br />
+          我们连接中国家庭与德国双元制教育体系，<br />
+          让真正的技能，创造真正的价值。
+        </p>
+        <div class="hero-actions">
+          <a href="products.html" class="btn btn-primary">探索核心项目 →</a>
+          <a href="contact.html" class="btn btn-outline">预约免费咨询</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-card reveal">
+          <div class="hero-card-header">
+            <div class="hero-card-icon">✈️</div>
+            <span class="hero-card-title">短期游学研学</span>
+            <span class="hero-card-tag">14天起</span>
+          </div>
+          <p>深入德国企业工厂、职业学院，感受双元制魅力，获 BBSN 官方研学证书</p>
+        </div>
+        <div class="hero-card reveal">
+          <div class="hero-card-header">
+            <div class="hero-card-icon">🎓</div>
+            <span class="hero-card-title">长期双元制留学</span>
+            <span class="hero-card-tag">3年制</span>
+          </div>
+          <p>进入德国企业边工边学，每月最高 €1,450 培训津贴，毕业获 IHK 国际认证</p>
+        </div>
+        <div class="hero-card reveal">
+          <div class="hero-card-header">
+            <div class="hero-card-icon">🤝</div>
+            <span class="hero-card-title">机构合作赋能</span>
+            <span class="hero-card-tag">B2B</span>
+          </div>
+          <p>为职业院校、语言机构、企业提供德国双元制课程接入与定制合作方案</p>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>向下了解</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ========== STATS BAR ========== -->
+  <section class="stats-bar" style="position:relative;overflow:hidden">
+    <div class="section-bg-layer" style="position:absolute;inset:0;background:url('assets/cathedral-blossom.jpg') center 40%/cover no-repeat;opacity:.06;"></div>
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item reveal">
+          <span class="stat-num">40+</span>
+          <span class="stat-label">成功赴德学员</span>
+        </div>
+        <div class="stat-item reveal">
+          <span class="stat-num">75%</span>
+          <span class="stat-label">德企首轮面试通过率</span>
+        </div>
+        <div class="stat-item reveal">
+          <span class="stat-num">€1,450</span>
+          <span class="stat-label">最高月度培训津贴</span>
+        </div>
+        <div class="stat-item reveal">
+          <span class="stat-num">7×24</span>
+          <span class="stat-label">德国本地辅导员响应</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== WHAT WE DO ========== -->
+  <section class="section services" style="position:relative;overflow:hidden">
+    <div class="section-bg-layer" style="position:absolute;inset:0;background:url('assets/classroom.jpg') center 50%/cover no-repeat;opacity:.05;"></div>
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">我们做什么</p>
+        <h2 class="section-title">三条路径，一套体系</h2>
+        <p class="section-desc">无论你是准备出发的青年学生，还是寻求国际化升级的机构或企业，德职通都有专属方案</p>
+      </div>
+      <div class="services-grid">
+        <div class="svc-card reveal">
+          <div class="svc-icon">✈️</div>
+          <h3>短期游学研学</h3>
+          <p>14天~4周，深入德国企业一线与职业学院，体验双元制职业教育，获 BBSN 官方证书，适合高中生、大学生及职教老师。</p>
+          <a href="products.html#study" class="svc-link">了解详情 →</a>
+        </div>
+        <div class="svc-card reveal">
+          <div class="svc-icon">🎓</div>
+          <h3>长期双元制留学</h3>
+          <p>3年制「校企双元」学习，进入德国企业边实训边领薪，毕业后获德国工商大会（IHK）国际职业资格证书，欧盟全区认可。</p>
+          <a href="products.html#longterm" class="svc-link">了解详情 →</a>
+        </div>
+        <div class="svc-card reveal">
+          <div class="svc-icon">🤝</div>
+          <h3>机构合作赋能</h3>
+          <p>为职业院校导入德国课程体系，为语言机构提供德国方向资源，为企业定制员工赴德培训方案，全方位 B2B 合作赋能。</p>
+          <a href="partners.html" class="svc-link">了解合作 →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== WHY CHOOSE US ========== -->
+  <section class="section why" style="position:relative;overflow:hidden">
+    <div class="section-bg-layer" style="position:absolute;inset:0;background:url('assets/hamburg-port.jpg') center 40%/cover no-repeat;opacity:.06;"></div>
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">为什么选择德职通</p>
+        <h2 class="section-title">四大核心优势</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card reveal">
+          <div class="why-num">01</div>
+          <div class="why-title">顶尖学府背景</div>
+          <div class="why-desc">北大、清华、德国亚琛工大三校创始团队，十年中德教育深耕经验</div>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-num">02</div>
+          <div class="why-title">官方权威合作</div>
+          <div class="why-desc">与德国 BBSN、IHK 等权威机构建立战略合作，资质正规可查</div>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-num">03</div>
+          <div class="why-title">全流程闭环</div>
+          <div class="why-desc">从德语培训、签证指导到德国本地 7×24 小时辅导，一站式无忧服务</div>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-num">04</div>
+          <div class="why-title">IHK 国际认证</div>
+          <div class="why-desc">毕业证书由德国工商大会签发，欧盟全区通用，全球雇主认可</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PARTNERS STRIP ========== -->
+  <div class="partners-strip">
+    <div class="container">
+      <p class="partners-strip-header">合作机构 &amp; 权威认证</p>
+      <div class="partners-logos">
+        <div class="partner-badge"><span class="flag">🇩🇪</span> BBSN 萨克森州建筑协会</div>
+        <div class="partner-badge"><span class="flag">🏛️</span> IHK 德国工商大会</div>
+        <div class="partner-badge"><span class="flag">🎓</span> 德国双元制职业学院</div>
+        <div class="partner-badge"><span class="flag">🌐</span> 德国联邦职业教育研究所</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== CTA ========== -->
+  <section class="cta-section" style="position:relative;overflow:hidden">
+    <div class="section-bg-layer" style="position:absolute;inset:0;background:url('assets/flight-to-germany.jpg') center 50%/cover no-repeat;opacity:.08;"></div>
+    <div class="container">
+      <p class="section-eyebrow" style="color:var(--gold)">立即开始</p>
+      <h2 class="section-title">人生是旷野，不是独木桥</h2>
+      <p class="section-desc">教育的意义，从来不是把人推向一条拥挤的路，<br />而是让人看见更多可能性，拥有掌控人生的底气。</p>
+      <div class="cta-actions" style="margin-top:40px">
+        <a href="products.html" class="btn btn-primary">查看核心项目</a>
+        <a href="contact.html" class="btn btn-outline">预约免费咨询</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="assets/logo.png" alt="德职通" height="40" onerror="this.style.display='none'" />
+            <span class="footer-logo-name">德职通</span>
+          </div>
+          <p>中德双元制留学与研学专家<br />职业路径设计平台</p>
+        </div>
+        <div class="footer-links">
+          <div class="fl-col">
+            <h5>核心服务</h5>
+            <ul>
+              <li><a href="products.html#study">短期游学研学</a></li>
+              <li><a href="products.html#longterm">长期双元制留学</a></li>
+              <li><a href="partners.html">机构合作赋能</a></li>
+            </ul>
+          </div>
+          <div class="fl-col">
+            <h5>关于我们</h5>
+            <ul>
+              <li><a href="about.html">品牌理念</a></li>
+              <li><a href="about.html#team">创始团队</a></li>
+              <li><a href="faq.html">常见问题</a></li>
+            </ul>
+          </div>
+          <div class="fl-col">
+            <h5>联系方式</h5>
+            <ul>
+              <li>微信：dezhitong123</li>
+              <li>网址：www.dezhitong.cn</li>
+              <li>地址：北京市海淀区</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2024 德职通双元制教育 版权所有</span>
+        <div class="beian-items">
+          <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048539" target="_blank" rel="noopener" class="beian-link">
+            <svg class="beian-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.5C17.25 22.15 21 17.25 21 12V7L12 2z" fill="#c9a84c" opacity="0.25"/><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.5C17.25 22.15 21 17.25 21 12V7L12 2z" stroke="#c9a84c" stroke-width="1.5" fill="none"/><path d="M9 12l2 2 4-4" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            京公网安备 11010802048539号
+          </a>
+          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener" class="beian-link">
+            京ICP备XXXXXXXX号
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="shared.js"></script>
+  <script>
+    // Hero background parallax & load animation
+    const heroBg = document.getElementById('heroBg');
+    if (heroBg) {
+      window.addEventListener('load', () => heroBg.classList.add('loaded'));
+      window.addEventListener('scroll', () => {
+        const offset = window.scrollY * 0.3;
+        heroBg.style.transform = `scale(1) translateY(${offset}px)`;
+      });
+    }
+  </script>
+</body>
+</html>

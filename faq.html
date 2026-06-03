@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>常见问题 · 德职通</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;900&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    .page-hero { background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%); padding: calc(var(--nav-h) + 72px) 0 80px; text-align: center; }
+    .page-hero .section-eyebrow { color: var(--gold); }
+    .page-hero .section-title { color: var(--white); }
+    .page-hero .section-desc { color: rgba(255,255,255,.7); }
+
+    .faq-layout { display: grid; grid-template-columns: 220px 1fr; gap: 48px; align-items: start; }
+    .faq-cats { position: sticky; top: calc(var(--nav-h) + 24px); }
+    .faq-cats h4 { font-size: .8rem; letter-spacing: .12em; color: var(--gray400); text-transform: uppercase; margin-bottom: 12px; }
+    .faq-cat-btn { display: block; width: 100%; text-align: left; padding: 10px 14px; border: none; background: none; cursor: pointer; color: var(--gray600); font-size: .9rem; border-radius: 8px; transition: var(--transition); margin-bottom: 4px; }
+    .faq-cat-btn:hover, .faq-cat-btn.active { background: var(--gray100); color: var(--navy); font-weight: 600; }
+
+    .faq-group { margin-bottom: 48px; }
+    .faq-group-title { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--gold); font-family: var(--serif); display: flex; align-items: center; gap: 10px; }
+    .faq-item { border: 1px solid var(--gray200); border-radius: 10px; margin-bottom: 10px; overflow: hidden; transition: var(--transition); }
+    .faq-item.open { border-color: var(--gold); }
+    .faq-q { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; background: none; border: none; cursor: pointer; text-align: left; font-size: .96rem; font-weight: 600; color: var(--navy); font-family: var(--font); transition: var(--transition); }
+    .faq-q:hover { background: var(--gray50); }
+    .faq-arrow { font-size: .7rem; color: var(--gray400); transition: var(--transition); flex-shrink: 0; }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); color: var(--gold); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .35s ease; padding: 0 22px; }
+    .faq-item.open .faq-a { max-height: 400px; padding: 0 22px 18px; }
+    .faq-a p { font-size: .92rem; color: var(--gray600); line-height: 1.8; }
+
+    @media (max-width: 768px) {
+      .faq-layout { grid-template-columns: 1fr; }
+      .faq-cats { position: static; display: flex; flex-wrap: wrap; gap: 8px; }
+      .faq-cat-btn { width: auto; padding: 8px 14px; border: 1px solid var(--gray200); border-radius: 100px; font-size: .82rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo.png" alt="德职通 Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="nav-logo-text" style="display:none"><span class="nav-logo-name">德职通</span><span class="nav-logo-sub">中德双元制教育</span></div>
+        <div class="nav-logo-text"><span class="nav-logo-sub">中德双元制教育平台</span></div>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="菜单"><span></span><span></span><span></span></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">首页</a></li><li><a href="about.html">关于我们</a></li><li><a href="products.html">核心产品</a></li><li><a href="partners.html">合作生态</a></li><li><a href="faq.html">常见问题</a></li><li><a href="contact.html" class="nav-cta">预约咨询</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page-hero" style="position:relative;overflow:hidden">
+    <div class="section-bg-layer" style="position:absolute;inset:0;background:url('assets/cathedral-blossom.jpg') center 35%/cover no-repeat;opacity:.12;"></div>
+    <div class="container">
+      <p class="section-eyebrow">常见问题</p>
+      <h1 class="section-title">你最关心的问题<br />我们都答</h1>
+      <p class="section-desc">没找到答案？直接联系我们的顾问</p>
+    </div>
+  </div>
+
+  <section class="section" style="position:relative;overflow:hidden">
+    <div class="section-bg-layer" style="position:absolute;inset:0;background:url('assets/neuschwanstein.jpg') center 50%/cover no-repeat;opacity:.04;"></div>
+    <div class="container">
+      <div class="faq-layout">
+        <div class="faq-cats">
+          <h4>问题分类</h4>
+          <button class="faq-cat-btn active" data-cat="basic">基础入门</button>
+          <button class="faq-cat-btn" data-cat="study">游学研学</button>
+          <button class="faq-cat-btn" data-cat="longterm">长期留学</button>
+          <button class="faq-cat-btn" data-cat="cost">费用与收入</button>
+          <button class="faq-cat-btn" data-cat="safe">安全保障</button>
+        </div>
+
+        <div class="faq-content">
+          <!-- 基础入门 -->
+          <div class="faq-group" data-cat="basic">
+            <div class="faq-group-title">🏁 基础入门</div>
+            <div class="faq-item">
+              <button class="faq-q">什么是德国双元制职业教育？<span class="faq-arrow">▼</span></button>
+              <div class="faq-a"><p>双元制（Duales Ausbildungssystem）是德国特有的职业教育体系，已运行近百年。学员同时在「企业（第一元）」和「职业学院（第二元）」学习，70%时间在企业实岗实训，30%时间在学校学理论。全程有薪，毕业获IHK国际认证。</p></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q">德职通是做什么的？和普通留学中介有什么区别？<span class="faq-arrow">▼</span></button>
+              <div class="faq-a"><p>德职通不是留学中介，而是职业路径设计平台。普通留学中介帮你申请大学，我们帮你设计整个职业路径：从认知中德教育差异，到匹配最适合你的德国企业，到赴德后的全程陪伴。我们更关注你的职业成长，而非仅仅完成手续。</p></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q">适合什么样的人参与德职通的项目？<span class="faq-arrow">▼</span></button>
+              <div class="faq-a"><p>游学研学：适合高中生、大学生、职教教师，以及对德国职业教育感兴趣的家长。长期留学：适合有意赴德、年龄18~30岁、愿意学德语并在德国工作生活3年以上的年轻人。机构合作：适合职业院校、德语培训机构、中德合资企业。</p></div>
+            </div>
+          </div>
+
+          <!-- 游学研学 -->
+          <div class="faq-group" data-cat="study">
+            <div class="faq-group-title">✈️ 游学研学</div>
+            <div class="faq-item">
+              <button class="faq-q">游学研学项目多长时间？在哪里进行？<span class="faq-arrow">▼</span></button>
+              <div class="faq-a"><p>基础项目14天，标准项目21天，深度项目28天。地点在德国境内，主要在萨克森州及周边地区，结合参观企业、职业学院及文化交流活动。</p></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q">研学团费高于普通旅游团，核心价值体现在哪里？<span class="faq-arrow">▼</span></button>
+              <div class="faq-a"><p>研学产品的核心是专业职业教育体验：①独家专业资源，可进入普通游客无法接触的企业工地、培训车间；②定制化专业课程，由BBSN专家针对中国学员设计；③官方认证师资与BBSN证书；④全流程无忧服务，含签证指导、国际机票、食宿交通、全程翻译，无隐形消费。</p></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q">需要会德语才能参加研学吗？<span class="faq-arrow">▼</span></button>
+              <div class="faq-a"><p>不需要。短期游学研学全程配备中德双语翻译随行，课程材料也提供中文版本。如果参与者有基础德语会是加分项，但绝不是门槛。</p></div>
+            </div>
+          </div>
+
+          <!-- 长期留学 -->
+          <div class="faq-group" data-cat="longterm">
+            <div class="faq-group-title">🎓 长期双元制留学</div>
+            <div class="faq-item">
+              <button class="faq-q">双元制留学需要什么条件？最低要求是什么？<span class="faq-arrow">▼</span></button>
+              <div class="faq-a"><p>最低要求：①年龄18~30岁；②高中及以上学历；③德语达到B1水平（德职通提供从零起步的德语培训）；④具备基本独立生活能力。部分专业对体能、视力等有额外要求，具体以德方企业要求为准。</p></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q">在德国学习期间，我的签证状态是什么？<span class="faq-arrow">▼</span></button>
+              <div class="faq-a"><p>在德国企业签订培训合同后，可申请「职业培训签证」（Ausbildungsvisum），这是德国官方认可的合法工作学习签证，不同于学生签证或旅游签证。德职通提供全程签证指导服务。</p></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q">毕业后可以留在德国工作吗？<span class="faq-arrow">▼</span></button>
+              <div class="faq-a"><p>可以。持有IHK职业资格证书的毕业生，可申请德国工作签证继续在德就业。根据德国「技术移民法」，双元制毕业生是受欢迎的技术移民群体，长期居留条件相对宽松。</p></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q">德语基础为零，可以申请长期项目吗？<span class="faq-arrow">▼</span></button>
+              <div class="faq-a"><p>可以，但需要提前规划学习时间。德语从零到B1一般需要12~18个月的系统学习。德职通提供配套德语培训课程，学员可在国内完成语言准备阶段，再启动留学申请。</p></div>
+            </div>
+          </div>
+
+          <!-- 费用与收入 -->
+          <div class="faq-group" data-cat="cost">
+            <div class="faq-group-title">💰 费用与收入</div>
+            <div class="faq-item">
+              <button class="faq-q">在德国培训期间，每月收入是多少？<span class="faq-arrow">▼</span></button>
+              <div class="faq-a"><p>培训津贴（Ausbildungsvergütung）由德方企业支付，金额根据专业和企业规模而定，通常在 €500~€1,450/月之间。制造业、IT类专业的津贴普遍高于服务类。这笔收入可覆盖学员的基本生活支出。</p></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q">德职通的服务费用是多少？包含哪些项目？<span class="faq-arrow">▼</span></button>
+              <div class="faq-a"><p>具体费用因项目类型、服务深度而异。德职通采用透明报价机制，咨询评估后会提供详细清单，无隐性收费。如需了解具体方案和价格，请通过联系页面预约顾问沟通。</p></div>
+            </div>
+          </div>
+
+          <!-- 安全保障 -->
+          <div class="faq-group" data-cat="safe">
+            <div class="faq-group-title">🛡️ 安全保障</div>
+            <div class="faq-item">
+              <button class="faq-q">孩子在德国出了问题怎么办？德职通能做什么？<span class="faq-arrow">▼</span></button>
+              <div class="faq-a"><p>德职通在德国配备本地中文辅导员，7×24小时响应。无论是生活问题、与企业沟通、医疗紧急情况还是签证问题，都有专人跟进处理。我们的承诺是：你在德国遇到的问题，我们比你更快知道、比你更快解决。</p></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q">德国生活安全吗？治安怎么样？<span class="faq-arrow">▼</span></button>
+              <div class="faq-a"><p>德国整体治安良好，是全球安全指数最高的国家之一。我们的项目合作地区主要在萨克森州等传统工业区，生活成本适中、华人社区活跃。德职通在行前会提供完整的德国生活适应培训。</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:48px;padding:48px;background:var(--gray50);border-radius:var(--radius)">
+        <p class="section-eyebrow">还有疑问？</p>
+        <h3 style="color:var(--navy);font-family:var(--serif);font-size:1.4rem;margin-bottom:12px">直接和顾问聊</h3>
+        <p style="color:var(--gray600);margin-bottom:24px">每个人的情况不同，我们更建议你和顾问一对一沟通，找到最适合的方案</p>
+        <a href="contact.html" class="btn btn-primary">预约免费咨询 →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand"><div class="footer-logo"><img src="assets/logo.png" alt="德职通" height="40" onerror="this.style.display='none'" /><span class="footer-logo-name">德职通</span></div><p>中德双元制留学与研学专家<br />职业路径设计平台</p></div>
+        <div class="footer-links">
+          <div class="fl-col"><h5>核心服务</h5><ul><li><a href="products.html#study">短期游学研学</a></li><li><a href="products.html#longterm">长期双元制留学</a></li><li><a href="partners.html">机构合作赋能</a></li></ul></div>
+          <div class="fl-col"><h5>关于我们</h5><ul><li><a href="about.html">品牌理念</a></li><li><a href="about.html#team">创始团队</a></li><li><a href="faq.html">常见问题</a></li></ul></div>
+          <div class="fl-col"><h5>联系方式</h5><ul><li>微信：dezhitong123</li><li>网址：www.dezhitong.cn</li><li>地址：北京市海淀区</li></ul></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2024 德职通双元制教育 版权所有</span>
+        <div class="beian-items">
+          <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048539" target="_blank" rel="noopener" class="beian-link"><svg class="beian-icon" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.5C17.25 22.15 21 17.25 21 12V7L12 2z" fill="#c9a84c" opacity="0.25"/><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.5C17.25 22.15 21 17.25 21 12V7L12 2z" stroke="#c9a84c" stroke-width="1.5" fill="none"/><path d="M9 12l2 2 4-4" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>京公网安备 11010802048539号</a>
+          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener" class="beian-link">京ICP备XXXXXXXX号</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="shared.js"></script>
+  <script>
+    // Category filter
+    document.querySelectorAll('.faq-cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.faq-cat-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.dataset.cat;
+        document.querySelectorAll('.faq-group').forEach(g => {
+          g.style.display = (g.dataset.cat === cat) ? 'block' : 'none';
+        });
+      });
+    });
+    // default show only basic
+    document.querySelectorAll('.faq-group').forEach(g => {
+      if (g.dataset.cat !== 'basic') g.style.display = 'none';
+    });
+  </script>
+</body>
+</html>

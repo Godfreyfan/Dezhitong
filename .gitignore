@@ -1,0 +1,9 @@
+.workbuddy/
+.codebuddy/
+contact-form-function/
+DEPLOY.md
+*.ps1
+dezhitong_content.md
+extract_docx.py
+temp_doc.zip
+unpacked/

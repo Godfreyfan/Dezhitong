@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>合作生态 · 德职通</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;900&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    .page-hero { background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%); padding: calc(var(--nav-h) + 72px) 0 80px; text-align: center; }
+    .page-hero .section-eyebrow { color: var(--gold); }
+    .page-hero .section-title { color: var(--white); }
+    .page-hero .section-desc { color: rgba(255,255,255,.7); }
+
+    .partner-types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-bottom: 80px; }
+    .pt-card {
+      background: var(--white); border-radius: var(--radius); padding: 36px 28px;
+      border: 1px solid var(--gray200); transition: var(--transition);
+    }
+    .pt-card:hover { border-color: var(--gold); box-shadow: 0 8px 32px rgba(201,168,76,.12); transform: translateY(-4px); }
+    .pt-icon { font-size: 2.4rem; margin-bottom: 18px; }
+    .pt-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 12px; font-family: var(--serif); }
+    .pt-card p { font-size: .9rem; color: var(--gray600); line-height: 1.7; margin-bottom: 20px; }
+    .pt-list { display: flex; flex-direction: column; gap: 8px; }
+    .pt-list li { font-size: .88rem; color: var(--gray600); padding-left: 16px; position: relative; line-height: 1.5; }
+    .pt-list li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+
+    .partners-official { background: var(--gray50); }
+    .official-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+    .official-card {
+      background: var(--white); border-radius: var(--radius); padding: 32px;
+      border: 1px solid var(--gray200); display: flex; gap: 20px; align-items: flex-start;
+      transition: var(--transition);
+    }
+    .official-card:hover { border-color: var(--navy); box-shadow: var(--shadow); }
+    .official-flag { font-size: 2.4rem; flex-shrink: 0; }
+    .official-info h3 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .official-info .org-tag { display: inline-block; background: rgba(201,168,76,.12); color: var(--gold); font-size: .72rem; padding: 2px 10px; border-radius: 100px; margin-bottom: 10px; }
+    .official-info p { font-size: .88rem; color: var(--gray600); line-height: 1.7; }
+
+    .collab-model { background: var(--navy); padding: 80px 0; }
+    .model-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+    .model-step { padding: 32px 20px; text-align: center; position: relative; }
+    .model-step:not(:last-child)::after {
+      content: '→'; position: absolute; right: -8px; top: 50px;
+      color: rgba(201,168,76,.5); font-size: 1.4rem;
+    }
+    .model-num { width: 52px; height: 52px; border-radius: 50%; background: rgba(201,168,76,.15); border: 2px solid var(--gold); color: var(--gold); font-weight: 900; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+    .model-step h4 { color: var(--white); font-size: .95rem; margin-bottom: 8px; }
+    .model-step p { color: rgba(255,255,255,.6); font-size: .84rem; line-height: 1.6; }
+
+    @media (max-width: 768px) {
+      .partner-types { grid-template-columns: 1fr; }
+      .official-grid { grid-template-columns: 1fr; }
+      .model-steps { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .model-steps { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo.png" alt="德职通 Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="nav-logo-text" style="display:none"><span class="nav-logo-name">德职通</span><span class="nav-logo-sub">中德双元制教育</span></div>
+        <div class="nav-logo-text"><span class="nav-logo-sub">中德双元制教育平台</span></div>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="菜单"><span></span><span></span><span></span></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">首页</a></li><li><a href="about.html">关于我们</a></li><li><a href="products.html">核心产品</a></li><li><a href="partners.html">合作生态</a></li><li><a href="faq.html">常见问题</a></li><li><a href="contact.html" class="nav-cta">预约咨询</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page-hero" style="position:relative;overflow:hidden">
+    <div class="section-bg-layer" style="position:absolute;inset:0;background:url('assets/neuschwanstein.jpg') center 30%/cover no-repeat;opacity:.12;"></div>
+    <div class="container">
+      <p class="section-eyebrow">合作生态</p>
+      <h1 class="section-title">共建中德职教生态圈</h1>
+      <p class="section-desc">德职通开放三类合作模式，与职业院校、语言机构、企业共同成长</p>
+    </div>
+  </div>
+
+  <section class="section" style="position:relative;overflow:hidden">
+    <div class="section-bg-layer" style="position:absolute;inset:0;background:url('assets/cathedral-blossom.jpg') center 50%/cover no-repeat;opacity:.05;"></div>
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">合作类型</p>
+        <h2 class="section-title">三类合作方案</h2>
+      </div>
+      <div class="partner-types">
+        <div class="pt-card reveal">
+          <div class="pt-icon">🏫</div>
+          <h3>职业院校合作</h3>
+          <p>为国内职业院校导入德国双元制课程体系，提升国际化竞争力，联合培养具有国际视野的技能人才。</p>
+          <ul class="pt-list">
+            <li>德国双元制课程本土化导入</li>
+            <li>联合举办赴德研学游学团</li>
+            <li>德国合作院校互访交流</li>
+            <li>共建中德联合实训基地</li>
+            <li>师资赴德研修培训</li>
+          </ul>
+        </div>
+        <div class="pt-card reveal">
+          <div class="pt-icon">🌐</div>
+          <h3>语言机构合作</h3>
+          <p>为德语培训机构提供专属德国方向升学路径资源，增强课程附加值，形成从语言到职业的完整链条。</p>
+          <ul class="pt-list">
+            <li>德国双元制留学资源导入</li>
+            <li>德语+职业规划联合课程</li>
+            <li>学员推荐与渠道分成</li>
+            <li>联合市场推广活动</li>
+            <li>定制化培训营合作</li>
+          </ul>
+        </div>
+        <div class="pt-card reveal">
+          <div class="pt-icon">🏢</div>
+          <h3>企业合作</h3>
+          <p>为中德合资企业、制造业头部企业提供员工赴德培训方案，提升核心技术骨干的国际化技能与视野。</p>
+          <ul class="pt-list">
+            <li>员工赴德定向培训项目</li>
+            <li>德国工厂参访与交流</li>
+            <li>双元制人才定向招募</li>
+            <li>中德技术合作对接</li>
+            <li>企业冠名研学项目</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <p class="section-eyebrow">官方合作机构</p>
+        <h2 class="section-title">权威背书，资质可查</h2>
+      </div>
+      <div class="official-grid">
+        <div class="official-card reveal">
+          <div class="official-flag">🏛️</div>
+          <div class="official-info">
+            <h3>BBSN · 德国萨克森州建筑协会</h3>
+            <span class="org-tag">战略合作伙伴</span>
+            <p>德国萨克森州建筑行业官方协会，负责颁发双元制研学证书，为德职通游学研学项目提供资质背书与专家支持。</p>
+          </div>
+        </div>
+        <div class="official-card reveal">
+          <div class="official-flag">📋</div>
+          <div class="official-info">
+            <h3>IHK · 德国工商大会</h3>
+            <span class="org-tag">认证机构</span>
+            <p>德国官方职业认证机构，颁发全德通用的职业资格证书（Abschlusszeugnis），是德国双元制学习的核心认证体系。</p>
+          </div>
+        </div>
+        <div class="official-card reveal">
+          <div class="official-flag">🎓</div>
+          <div class="official-info">
+            <h3>德国职业学院（Berufsschule）</h3>
+            <span class="org-tag">教学合作</span>
+            <p>与多所德国职业学院建立合作关系，为中国学员提供理论课程学习资源，与企业实训协同构成完整的双元制体验。</p>
+          </div>
+        </div>
+        <div class="official-card reveal">
+          <div class="official-flag">🌍</div>
+          <div class="official-info">
+            <h3>中德产业合作企业网络</h3>
+            <span class="org-tag">实习单位资源</span>
+            <p>德职通维护覆盖制造业、信息技术、服务业等多个领域的德国合作企业名单，为学员提供丰富的实训岗位选择。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="collab-model" style="position:relative;overflow:hidden">
+    <div class="section-bg-layer" style="position:absolute;inset:0;background:url('assets/flight-to-germany.jpg') center 50%/cover no-repeat;opacity:.08;"></div>
+    <div class="container">
+      <div class="section-header light">
+        <p class="section-eyebrow">合作流程</p>
+        <h2 class="section-title">从接触到落地，四步建立合作</h2>
+      </div>
+      <div class="model-steps">
+        <div class="model-step reveal"><div class="model-num">01</div><h4>需求对接</h4><p>提交合作意向，德职通团队 48 小时内响应</p></div>
+        <div class="model-step reveal"><div class="model-num">02</div><h4>方案设计</h4><p>根据机构/企业实际需求定制合作方案</p></div>
+        <div class="model-step reveal"><div class="model-num">03</div><h4>协议签署</h4><p>明确权责、分成机制及服务标准</p></div>
+        <div class="model-step reveal"><div class="model-num">04</div><h4>正式启动</h4><p>首批学员/项目启动，全程跟踪服务</p></div>
+      </div>
+      <div style="text-align:center;margin-top:48px">
+        <a href="contact.html" class="btn btn-primary">申请合作 →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand"><div class="footer-logo"><img src="assets/logo.png" alt="德职通" height="40" onerror="this.style.display='none'" /><span class="footer-logo-name">德职通</span></div><p>中德双元制留学与研学专家<br />职业路径设计平台</p></div>
+        <div class="footer-links">
+          <div class="fl-col"><h5>核心服务</h5><ul><li><a href="products.html#study">短期游学研学</a></li><li><a href="products.html#longterm">长期双元制留学</a></li><li><a href="partners.html">机构合作赋能</a></li></ul></div>
+          <div class="fl-col"><h5>关于我们</h5><ul><li><a href="about.html">品牌理念</a></li><li><a href="about.html#team">创始团队</a></li><li><a href="faq.html">常见问题</a></li></ul></div>
+          <div class="fl-col"><h5>联系方式</h5><ul><li>微信：dezhitong123</li><li>网址：www.dezhitong.cn</li><li>地址：北京市海淀区</li></ul></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2024 德职通双元制教育 版权所有</span>
+        <div class="beian-items">
+          <a href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048539" target="_blank" rel="noopener" class="beian-link"><svg class="beian-icon" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.5C17.25 22.15 21 17.25 21 12V7L12 2z" fill="#c9a84c" opacity="0.25"/><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.5C17.25 22.15 21 17.25 21 12V7L12 2z" stroke="#c9a84c" stroke-width="1.5" fill="none"/><path d="M9 12l2 2 4-4" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>京公网安备 11010802048539号</a>
+          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener" class="beian-link">京ICP备XXXXXXXX号</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="shared.js"></script>
+</body>
+</html>
