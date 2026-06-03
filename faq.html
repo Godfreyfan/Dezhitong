@@ -7,10 +7,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;900&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="shared.css" />
   <style>
-    .page-hero { background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%); padding: calc(var(--nav-h) + 72px) 0 80px; text-align: center; }
-    .page-hero .section-eyebrow { color: var(--gold); }
-    .page-hero .section-title { color: var(--white); }
-    .page-hero .section-desc { color: rgba(255,255,255,.7); }
+    .page-hero { position: relative; overflow: hidden; background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%); padding: calc(var(--nav-h) + 72px) 0 80px; text-align: center; }
+    .page-hero-bg { position: absolute; inset: 0; background: url('assets/cathedral-blossom.jpg') center 35%/cover no-repeat; opacity: .12; }
+    .page-hero .section-eyebrow { color: var(--gold); position: relative; z-index: 1; }
+    .page-hero .section-title { color: var(--white); position: relative; z-index: 1; }
+    .page-hero .section-desc { color: rgba(255,255,255,.7); position: relative; z-index: 1; }
 
     .faq-layout { display: grid; grid-template-columns: 220px 1fr; gap: 48px; align-items: start; }
     .faq-cats { position: sticky; top: calc(var(--nav-h) + 24px); }
@@ -52,8 +53,8 @@
     </div>
   </nav>
 
-  <div class="page-hero" style="position:relative;overflow:hidden">
-    <div class="section-bg-layer" style="position:absolute;inset:0;background:url('assets/cathedral-blossom.jpg') center 35%/cover no-repeat;opacity:.12;"></div>
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
     <div class="container">
       <p class="section-eyebrow">常见问题</p>
       <h1 class="section-title">你最关心的问题<br />我们都答</h1>
@@ -61,8 +62,7 @@
     </div>
   </div>
 
-  <section class="section" style="position:relative;overflow:hidden">
-    <div class="section-bg-layer" style="position:absolute;inset:0;background:url('assets/neuschwanstein.jpg') center 50%/cover no-repeat;opacity:.04;"></div>
+  <section class="section">
     <div class="container">
       <div class="faq-layout">
         <div class="faq-cats">
