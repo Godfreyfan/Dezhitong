@@ -98,67 +98,7 @@ document.querySelectorAll([
 });
 
 // ——— Contact form ———
-const form = document.getElementById('contactForm');
-if (form) {
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btn = form.querySelector('button[type="submit"]');
-    const original = btn.textContent;
-
-    // 收集表单数据
-    const formData = {
-      name: form.querySelector('#name').value.trim(),
-      phone: form.querySelector('#phone').value.trim(),
-      interest: form.querySelector('#interest').value,
-      message: form.querySelector('#message').value.trim(),
-    };
-
-    // 前端基本校验
-    if (!formData.name || !formData.phone || !formData.message) {
-      alert('请填写姓名、联系方式和留言内容');
-      return;
-    }
-
-    // 加载状态
-    btn.textContent = '⏳ 提交中...';
-    btn.disabled = true;
-
-    try {
-      // TODO: 替换为腾讯云 SCF 的实际 HTTP 触发地址
-      const SCF_URL = 'https://service-xxxxxxx.gz.apigw.tencentcs.com/release/dezhitong-contact';
-
-      const res = await fetch(SCF_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await res.json();
-
-      if (data.success) {
-        btn.textContent = '✓ 提交成功！';
-        btn.style.background = 'linear-gradient(135deg, #4caf50, #388e3c)';
-        btn.style.color = '#fff';
-        form.reset();
-        setTimeout(() => {
-          btn.textContent = original;
-          btn.disabled = false;
-          btn.style.background = '';
-          btn.style.color = '';
-        }, 5000);
-      } else {
-        alert(data.message || '提交失败，请稍后重试');
-        btn.textContent = original;
-        btn.disabled = false;
-      }
-    } catch (err) {
-      console.error('提交失败:', err);
-      alert('网络异常，请稍后重试或直接联系我们');
-      btn.textContent = original;
-      btn.disabled = false;
-    }
-  });
-}
+// 已改为腾讯问卷 iframe 嵌入（contact.html），无需本地表单提交逻辑
 
 // ——— Smooth scroll for anchor links ———
 document.querySelectorAll('a[href^="#"]').forEach(a => {

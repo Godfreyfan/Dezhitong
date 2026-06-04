@@ -30,27 +30,16 @@
     .wechat-id { font-size: 1.4rem; font-weight: 700; color: var(--gold); font-family: var(--serif); margin-bottom: 8px; }
     .wechat-box small { color: rgba(255,255,255,.45); font-size: .78rem; }
 
-    /* Form */
-    .contact-form-card { background: var(--white); border-radius: var(--radius); padding: 40px; border: 1px solid var(--gray200); box-shadow: 0 4px 32px rgba(0,0,0,.06); }
-    .contact-form-card h3 { font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; font-family: var(--serif); }
-    .contact-form-card p { font-size: .88rem; color: var(--gray600); margin-bottom: 28px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
-    .form-group label { font-size: .85rem; font-weight: 600; color: var(--gray600); }
-    .form-group input, .form-group select, .form-group textarea {
-      padding: 12px 16px; border: 1.5px solid var(--gray200); border-radius: 8px;
-      font-size: .94rem; font-family: var(--font); color: var(--gray800);
-      transition: var(--transition); background: var(--white);
-    }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-      outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,.12);
-    }
-    .form-group textarea { resize: vertical; min-height: 110px; }
-    .form-note { font-size: .8rem; color: var(--gray400); text-align: center; margin-top: 12px; }
+    /* 腾讯问卷嵌入 */
+    .survey-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--gray200); box-shadow: 0 4px 32px rgba(0,0,0,.06); overflow: hidden; }
+    .survey-card iframe { display: block; width: 100%; height: 620px; border: none; }
+    .survey-loading { text-align: center; padding: 60px 20px; color: var(--gray400); font-size: .92rem; }
+    .survey-loading::before { content: ''; display: block; width: 32px; height: 32px; margin: 0 auto 16px; border: 3px solid var(--gray200); border-top-color: var(--gold); border-radius: 50%; animation: spin .8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     @media (max-width: 768px) {
       .contact-layout { grid-template-columns: 1fr; }
-      .form-row { grid-template-columns: 1fr; }
+      .survey-card iframe { height: 750px; }
     }
   </style>
 </head>
@@ -115,39 +104,18 @@
         </div>
 
         <div class="contact-right">
-          <div class="contact-form-card reveal">
-            <h3>预约免费咨询</h3>
-            <p>填写信息，顾问将在 24 小时内与您联系</p>
-            <form id="contactForm">
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="name">姓名 <span style="color:red">*</span></label>
-                  <input type="text" id="name" name="name" placeholder="您的姓名" required />
-                </div>
-                <div class="form-group">
-                  <label for="phone">联系方式 <span style="color:red">*</span></label>
-                  <input type="text" id="phone" name="phone" placeholder="手机号 / 微信" required />
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="interest">感兴趣的项目</label>
-                <select id="interest" name="interest">
-                  <option value="">请选择（可不选）</option>
-                  <option value="dual-system">德国双元制留学</option>
-                  <option value="summer-camp">暑期研学营</option>
-                  <option value="vocational">职业教育路径规划</option>
-                  <option value="partner-school">职业院校合作</option>
-                  <option value="partner-corp">企业合作</option>
-                  <option value="consultation">综合咨询</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="message">留言 <span style="color:red">*</span></label>
-                <textarea id="message" name="message" placeholder="请告诉我们您的情况或问题，越具体越好..."></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary btn-full">提交咨询</button>
-              <p class="form-note">我们重视您的隐私，所有信息仅用于咨询服务，不会对外共享</p>
-            </form>
+          <!-- 腾讯问卷 iframe 嵌入 | 问卷ID: 26919703 -->
+          <div class="survey-card reveal">
+            <div class="survey-loading" id="surveyLoading">问卷加载中...</div>
+            <iframe
+              id="surveyIframe"
+              src="https://wj.qq.com/s2/26919703/55de/"
+              allow="camera;microphone;geolocation"
+              style="display:none;"
+              title="德职通咨询问卷"
+              onload="document.getElementById('surveyLoading').style.display='none';this.style.display='block';"
+              onerror="document.getElementById('surveyLoading').innerHTML='问卷加载失败，请尝试<a href=\\'https://wj.qq.com/s2/26919703/55de/\\' target=\\'_blank\\'>直接打开</a>或联系微信 dezhitong123'"
+            ></iframe>
           </div>
         </div>
       </div>
